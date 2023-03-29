@@ -41,14 +41,17 @@ def enterCustomerInfo():
     postalCode = input("Postal Code: ")
 
     while validatePostalCode(postalCode) != True:
+            print("Invalid Postal Code")
             postalCode = input("Postal Code: ")
 
     creditCardNumber = input("Credit Card Number: ") 
         
     while len(creditCardNumber) < 9:
+        print("Invalid Credit Card")
         creditCardNumber = input("Credit Card Number: ") 
 
     while validateCreditCard(creditCardNumber) != True:
+        print("Invalid Credit Card")
         creditCardNumber = input("Credit Card Number: ")     
 
 '''
@@ -58,7 +61,7 @@ def enterCustomerInfo():
     This function may also be broken down further depending on your algorithm/approach
 '''
 def validatePostalCode(postalCode):
-    'Asks the user for their postal code and checks whether it is valid, by searching the csv file for it'
+    'Checks whether the postal code valid, by checking if the first 3 characters are in the postal_codes.csv file'
     fileName = folder + "\\postal_codes.csv"
     file = open(fileName, "r")
     csvFile = csv.reader(file, delimiter="|")
@@ -75,7 +78,7 @@ def validatePostalCode(postalCode):
     This function may also be broken down further depending on your algorithm/approach
 '''
 def validateCreditCard(creditCardNumber):
-    'check'
+    'Check whether the credit card number is valid by using the luhn algorithm to check if the sum ends in a 0'
     sum1 = 0
     sum2 = 0
     reverseCard = str(creditCardNumber[::-1])
