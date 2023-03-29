@@ -58,7 +58,7 @@ def enterCustomerInfo():
     This function may also be broken down further depending on your algorithm/approach
 '''
 def validatePostalCode(postalCode):
-    'Asks the user for their postal code and checks whether it is valid'
+    'Asks the user for their postal code and checks whether it is valid, by searching the csv file for it'
     fileName = folder + "\\postal_codes.csv"
     file = open(fileName, "r")
     csvFile = csv.reader(file, delimiter="|")
@@ -82,7 +82,7 @@ def validateCreditCard(creditCardNumber):
     for i in range(0, len(str(reverseCard)), 2):
         oddDigit = int(reverseCard[i])
         sum1 += oddDigit
-#xsasgvgdssa
+
     for i in range(1, len(str(reverseCard)), 2):
         evenDigit = int(reverseCard[i])*2
         if evenDigit > 9:
