@@ -42,9 +42,9 @@ def enterCustomerInfo():
 
     while validatePostalCode(postalCode) != True:
             postalCode = input("Postal Code: ")
-    
+
     creditCardNumber = input("Credit Card Number: ") 
-    
+        
     while len(creditCardNumber) < 9:
         creditCardNumber = input("Credit Card Number: ") 
 
@@ -80,24 +80,22 @@ def validateCreditCard(creditCardNumber):
     sum2 = 0
     reverseCard = str(creditCardNumber[::-1])
     for i in range(0, len(str(reverseCard)), 2):
-        digit = int(reverseCard[i])
-        sum1 += digit
-    print(sum1)
+        oddDigit = int(reverseCard[i])
+        sum1 += oddDigit
 
     for i in range(1, len(str(reverseCard)), 2):
-        digit = int(reverseCard[i])*2
-        if digit > 9:
-            for x in range(len(str(digit))):
-                doubleDigit = int(digit[i])
-                digit += doubleDigit
-        sum2 += digit
-    print(sum2)
+        evenDigit = int(reverseCard[i])*2
+        if evenDigit > 9:
+            evenDigit = str(evenDigit)
+            evenDigit1 = evenDigit[0]
+            evenDigit2 = evenDigit[1]
+            evenDigit = int(evenDigit1) + int(evenDigit2)
+        sum2 += evenDigit
 
+    sum = str(sum1+sum2)
     
-
-    #print(reverseCard%10)
-
-
+    if sum[-1] == "0":
+        return True
 
 '''
     This function is to be edited to achieve the task.
