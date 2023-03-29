@@ -82,7 +82,7 @@ def validateCreditCard(creditCardNumber):
     for i in range(0, len(str(reverseCard)), 2):
         oddDigit = int(reverseCard[i])
         sum1 += oddDigit
-
+#xsasgvgdssa
     for i in range(1, len(str(reverseCard)), 2):
         evenDigit = int(reverseCard[i])*2
         if evenDigit > 9:
