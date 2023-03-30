@@ -52,7 +52,9 @@ def enterCustomerInfo():
 
     while validateCreditCard(creditCardNumber) != True:
             print("Invalid Credit Card")
-            creditCardNumber = input("Credit Card Number: ")     
+            creditCardNumber = input("Credit Card Number: ") 
+
+    info = "ID: ", customerId, "\nFirst Name: ", customerFirstName, "\nLast Name:", customerLastName, "\nCity: ", city, "\nPostal Code: "
     
     #generateCustomerDataFile(customerFirstName, customerLastName, city, postalCode, creditCardNumber)
 
