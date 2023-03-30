@@ -45,14 +45,16 @@ def enterCustomerInfo():
             postalCode = input("Postal Code: ")
 
     creditCardNumber = input("Credit Card Number: ") 
-        
+
     while len(creditCardNumber) < 9:
         print("Invalid Credit Card")
         creditCardNumber = input("Credit Card Number: ") 
 
     while validateCreditCard(creditCardNumber) != True:
-        print("Invalid Credit Card")
-        creditCardNumber = input("Credit Card Number: ")     
+            print("Invalid Credit Card")
+            creditCardNumber = input("Credit Card Number: ")     
+    
+    #generateCustomerDataFile(customerFirstName, customerLastName, city, postalCode, creditCardNumber)
 
 '''
     This function is to be edited to achieve the task.
@@ -107,7 +109,22 @@ def validateCreditCard(creditCardNumber):
     This function may also be broken down further depending on your algorithm/approach
 '''
 def generateCustomerDataFile():
-    print(customerId, customerFirstName, customerLastName, city, postalCode, creditCardNumber)
+    fileName = folder + "\\data_file.txt"
+    # Append mode adds the lines to the end of the file without overwriting
+    file = open(fileName, "a")
+    file.write("\nID: ")
+    file.write(str(customerId))
+    file.write("\nFirst Name: ")
+    file.write(customerFirstName)
+    file.write("\nLast Name: ")
+    file.write(customerLastName)
+    file.write("\nCity: ")
+    file.write(city)
+    file.write("\nPostal Code: ")
+    file.write(postalCode)
+    file.write("\nCredit Card Number: ")
+    file.write(creditCardNumber)
+    file.close()
 
 ####################################################################
 #       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         #
