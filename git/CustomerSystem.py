@@ -27,12 +27,8 @@ def printMenu():
 '''
 def enterCustomerInfo():
     'Asks the user for their first name, last name, city, postal code, and credit card number, and then saves that information'
-    global customerFirstName
-    global customerLastName
-    global city
-    global postalCode
-    global creditCardNumber
     global customerId
+    global info
 
     customerId = customerId + 1
     customerFirstName = input("First Name: ")
@@ -46,17 +42,11 @@ def enterCustomerInfo():
 
     creditCardNumber = input("Credit Card Number: ") 
 
-    while len(creditCardNumber) < 9:
-        print("Invalid Credit Card")
-        creditCardNumber = input("Credit Card Number: ") 
-
     while validateCreditCard(creditCardNumber) != True:
             print("Invalid Credit Card")
             creditCardNumber = input("Credit Card Number: ") 
 
-    info = "ID: ", customerId, "\nFirst Name: ", customerFirstName, "\nLast Name:", customerLastName, "\nCity: ", city, "\nPostal Code: "
-    
-    #generateCustomerDataFile(customerFirstName, customerLastName, city, postalCode, creditCardNumber)
+    info = "ID: ", str(customerId), "\nFirst Name: ", customerFirstName, "\nLast Name: ", customerLastName, "\nCity: ", city, "\nPostal Code: ", postalCode, "\nCredit Card Number: ", creditCardNumber, "\n\n"
 
 '''
     This function is to be edited to achieve the task.
@@ -83,6 +73,8 @@ def validatePostalCode(postalCode):
 '''
 def validateCreditCard(creditCardNumber):
     'Check whether the credit card number is valid by using the luhn algorithm to check if the sum ends in a 0'
+    if len(creditCardNumber) < 9 or creditCardNumber.isnumeric() != True:
+        return False
     sum1 = 0
     sum2 = 0
     reverseCard = str(creditCardNumber[::-1])
@@ -114,18 +106,7 @@ def generateCustomerDataFile():
     fileName = folder + "\\data_file.txt"
     # Append mode adds the lines to the end of the file without overwriting
     file = open(fileName, "a")
-    file.write("\nID: ")
-    file.write(str(customerId))
-    file.write("\nFirst Name: ")
-    file.write(customerFirstName)
-    file.write("\nLast Name: ")
-    file.write(customerLastName)
-    file.write("\nCity: ")
-    file.write(city)
-    file.write("\nPostal Code: ")
-    file.write(postalCode)
-    file.write("\nCredit Card Number: ")
-    file.write(creditCardNumber)
+    file.writelines(info)
     file.close()
 
 ####################################################################
