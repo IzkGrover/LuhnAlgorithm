@@ -30,23 +30,26 @@ def enterCustomerInfo():
     global customerId
     global info
 
+    # States the ID of the user, and asks them to input all there information
     customerId = customerId + 1
     customerFirstName = input("First Name: ")
     customerLastName = input("Last Name: ")
     city = input("City: ")
     postalCode = input("Postal Code: ")
 
+    # Validates the postal code by calling the validatePostalCode() function
     while validatePostalCode(postalCode) != True:
             print("Invalid Postal Code")
             postalCode = input("Postal Code: ")
 
     creditCardNumber = input("Credit Card Number: ") 
 
+    # Validates the credit card number by calling the validateCreditCard() function
     while validateCreditCard(creditCardNumber) != True:
             print("Invalid Credit Card")
             creditCardNumber = input("Credit Card Number: ") 
 
-    info = "ID: ", str(customerId), "\nFirst Name: ", customerFirstName, "\nLast Name: ", customerLastName, "\nCity: ", city, "\nPostal Code: ", postalCode, "\nCredit Card Number: ", creditCardNumber, "\n\n"
+    info = str(customerId) + "," + customerFirstName + "," + customerLastName + "," +  city, "," + postalCode + "," + creditCardNumber + "\n"
 
 '''
     This function is to be edited to achieve the task.
@@ -56,10 +59,12 @@ def enterCustomerInfo():
 '''
 def validatePostalCode(postalCode):
     'Checks whether the postal code valid, by checking if the first 3 characters are in the postal_codes.csv file'
+    # Opens and reads the file using | as the delimiter
     fileName = folder + "\\postal_codes.csv"
     file = open(fileName, "r")
     csvFile = csv.reader(file, delimiter="|")
 
+    # Searches each line of the file for the first 3 letters of the postal code
     for line in csvFile:        
         if postalCode[:3] in line:
             return True
@@ -73,15 +78,22 @@ def validatePostalCode(postalCode):
 '''
 def validateCreditCard(creditCardNumber):
     'Check whether the credit card number is valid by using the luhn algorithm to check if the sum ends in a 0'
+    # Checks if the file has more than 9 characters and is not a string
     if len(creditCardNumber) < 9 or creditCardNumber.isnumeric() != True:
         return False
+    
     sum1 = 0
     sum2 = 0
+
+    # Reverses the card number
     reverseCard = str(creditCardNumber[::-1])
+
+    # Adds together all the odd numbers and saves as sum1
     for i in range(0, len(str(reverseCard)), 2):
         oddDigit = int(reverseCard[i])
         sum1 += oddDigit
 
+    # Doubles all the even numbers and if they are more than 9 adds the 2 digits, then saves as sum2
     for i in range(1, len(str(reverseCard)), 2):
         evenDigit = int(reverseCard[i])*2
         if evenDigit > 9:
@@ -91,8 +103,10 @@ def validateCreditCard(creditCardNumber):
             evenDigit = int(evenDigit1) + int(evenDigit2)
         sum2 += evenDigit
 
+    # Adds the 2 sums together
     sum = str(sum1+sum2)
     
+    # Checks if the last number in the total sum is 0
     if sum[-1] == "0":
         return True
 
@@ -103,8 +117,8 @@ def validateCreditCard(creditCardNumber):
     This function may also be broken down further depending on your algorithm/approach
 '''
 def generateCustomerDataFile():
-    fileName = folder + "\\data_file.txt"
-    # Append mode adds the lines to the end of the file without overwriting
+    # Creates the data file if it does not already exist, then appends the new info to it
+    fileName = folder + "\\data_file.csv"
     file = open(fileName, "a")
     file.writelines(info)
     file.close()
