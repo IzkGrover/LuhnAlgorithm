@@ -117,6 +117,7 @@ def validateCreditCard(creditCardNumber):
     This function may also be broken down further depending on your algorithm/approach
 '''
 def generateCustomerDataFile():
+    'Generates or opens the data file, and appends the customers information'
     # Creates the data file if it does not already exist, then appends the new info to it
     fileName = folder + "\\data_file.csv"
     file = open(fileName, "a")
